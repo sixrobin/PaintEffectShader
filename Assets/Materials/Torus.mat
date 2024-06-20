@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRamp:
-        m_Texture: {fileID: 2800000, guid: 559d5931562620048b7f60efe0a78a37, type: 3}
+        m_Texture: {fileID: 2800000, guid: f1839dde3be913b41861aedeebfa397b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -39,12 +39,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _AmbientColorIntensity: 1
-    - _AmbientColorMinThreshold: 0.675
+    - _AmbientColorMinThreshold: 0.75
     - _LightIntensity: 1
-    - _MaxLightValue: 0.315
+    - _MaxLightValue: 0.825
     - _MinLightValue: 0
     - _PaintSmoothing: 0.486
-    - _SpecularIntensity: 1
-    - _SpecularPower: 64
+    - _SpecularIntensity: 0.23
+    - _SpecularPower: 8
+    - _SpecularSmoothing: 0.044
     m_Colors: []
   m_BuildTextureStacks: []
