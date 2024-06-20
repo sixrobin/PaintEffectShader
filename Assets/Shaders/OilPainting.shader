@@ -7,6 +7,7 @@ Shader "Oil Painting"
         _PaintSmoothing ("Paint Smoothing", Range(0, 1)) = 0.5
         _LightIntensity ("Light Intensity", Range(0, 1)) = 1
         _AmbientColorIntensity ("Ambient Color Intensity", Range(0, 1)) = 1
+        _AmbientColorMinThreshold ("Ambient Color Min Threshold", Range(0, 1)) = 0
         _MinLightValue ("Min Light Value", Range(0, 1)) = 0
         _MaxLightValue ("Max Light Value", Range(0, 1)) = 1
         _SpecularIntensity ("Specular Intensity", Range(0, 1)) = 1
@@ -48,6 +49,7 @@ Shader "Oil Painting"
             float4 _LightColor0;
             float _LightIntensity;
             float _AmbientColorIntensity;
+            float _AmbientColorMinThreshold;
             float _MinLightValue;
             float _MaxLightValue;
 
@@ -72,6 +74,7 @@ Shader "Oil Painting"
 
                 float paint = tex2D(_PaintTexture, i.uv); // TODO: Tri-planar projection.
 
+                // TODO: Specular highlight is still too "smooth", not applied to paint texture. Custom smoothing for specular?
                 float spec = specular(_SpecularIntensity, i.normal, lightDir, i.worldPos, _SpecularPower);
                 spec = smoothstep(paint - _PaintSmoothing, paint + _PaintSmoothing, spec);
 
@@ -85,6 +88,10 @@ Shader "Oil Painting"
                 // TODO: Add shadows.
 
                 float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0));
+
+                float3 ambientColor = UNITY_LIGHTMODEL_AMBIENT * _AmbientColorIntensity;
+                float ambientColorMask = saturate(smoothstep(_AmbientColorMinThreshold, 1, 1 - diffuse));
+                paintColor.rgb = lerp(paintColor.rgb, paintColor.rgb + ambientColor, ambientColorMask);
                 
                 return paintColor;
             }

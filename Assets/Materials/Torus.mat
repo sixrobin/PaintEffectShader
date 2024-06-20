@@ -38,7 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientColorIntensity: 0.761
+    - _AmbientColorIntensity: 1
+    - _AmbientColorMinThreshold: 0.75
     - _LightIntensity: 1
     - _MaxLightValue: 1
     - _MinLightValue: 0.056

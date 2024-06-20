@@ -39,6 +39,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AmbientColorIntensity: 1
+    - _AmbientColorMinThreshold: 0.75
     - _LightIntensity: 0.33
     - _MaxLightValue: 1
     - _MinLightValue: 0
