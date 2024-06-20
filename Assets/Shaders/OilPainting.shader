@@ -3,6 +3,7 @@ Shader "Oil Painting"
     Properties
     {
         _PaintTexture ("Paint Texture", 2D) = "white" {}
+        _TriplanarScale ("Triplanar Scale", Float) = 1
         _ColorRamp ("Color Ramp", 2D) = "white" {}
         _PaintSmoothing ("Paint Smoothing", Range(0, 1)) = 0.5
         _LightIntensity ("Light Intensity", Range(0, 1)) = 1
