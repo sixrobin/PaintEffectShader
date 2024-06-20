@@ -71,16 +71,15 @@ Shader "Oil Painting"
             fixed4 frag(v2f i) : SV_Target
             {
                 float3 normal = i.normal * 0.5 + 0.5;
-                float3 lightColor = _LightColor0.rgb;
+                float4 lightColor = _LightColor0;
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
 
                 float paint = tex2D(_PaintTexture, i.uv); // TODO: Tri-planar projection.
 
-                // TODO: Specular highlight is still too "smooth", not applied to paint texture. Custom smoothing for specular?
                 float spec = specular(_SpecularIntensity, i.normal, lightDir, i.worldPos, _SpecularPower);
                 spec = smoothstep(paint - _SpecularSmoothing, paint + _SpecularSmoothing, spec);
 
-                float diffuse = lambert(lightColor, _LightIntensity, normal, lightDir).x;
+                float diffuse = lambert(lightColor.rgb, _LightIntensity, normal, lightDir).x;
                 diffuse = smoothstep(paint - _PaintSmoothing, paint + _PaintSmoothing, diffuse);
                 diffuse = clamp(diffuse, _MinLightValue, _MaxLightValue);
                 diffuse += spec;
@@ -88,7 +87,7 @@ Shader "Oil Painting"
                 // TODO: Add fresnel to see how it looks.
                 // TODO: Add shadows.
 
-                float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0));
+                float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0)) * lightColor;
 
                 float3 ambientColor = UNITY_LIGHTMODEL_AMBIENT * _AmbientColorIntensity;
                 float ambientColorMask = saturate(smoothstep(_AmbientColorMinThreshold, 1, 1 - diffuse));
