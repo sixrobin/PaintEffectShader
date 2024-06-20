@@ -12,6 +12,7 @@ Shader "Oil Painting"
         _MaxLightValue ("Max Light Value", Range(0, 1)) = 1
         _SpecularIntensity ("Specular Intensity", Range(0, 1)) = 1
         _SpecularPower ("Specular Power", Range(1, 128)) = 64
+        _SpecularSmoothing ("Specular Smoothing", Range(0, 1)) = 0.5
     }
     
     SubShader
@@ -55,6 +56,7 @@ Shader "Oil Painting"
 
             float _SpecularIntensity;
             float _SpecularPower;
+            float _SpecularSmoothing;
             
             v2f vert(appdata v)
             {
@@ -76,7 +78,7 @@ Shader "Oil Painting"
 
                 // TODO: Specular highlight is still too "smooth", not applied to paint texture. Custom smoothing for specular?
                 float spec = specular(_SpecularIntensity, i.normal, lightDir, i.worldPos, _SpecularPower);
-                spec = smoothstep(paint - _PaintSmoothing, paint + _PaintSmoothing, spec);
+                spec = smoothstep(paint - _SpecularSmoothing, paint + _SpecularSmoothing, spec);
 
                 float diffuse = lambert(lightColor, _LightIntensity, normal, lightDir).x;
                 diffuse = smoothstep(paint - _PaintSmoothing, paint + _PaintSmoothing, diffuse);
