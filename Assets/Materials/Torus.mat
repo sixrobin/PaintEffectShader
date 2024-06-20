@@ -44,8 +44,8 @@ Material:
     - _MaxLightValue: 0.825
     - _MinLightValue: 0
     - _PaintSmoothing: 0.486
-    - _SpecularIntensity: 0.23
-    - _SpecularPower: 8
+    - _SpecularIntensity: 0.458
+    - _SpecularPower: 9.5
     - _SpecularSmoothing: 0.044
     m_Colors: []
   m_BuildTextureStacks: []

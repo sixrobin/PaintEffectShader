@@ -26,6 +26,7 @@ Shader "Oil Painting"
 
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
+            #include "Triplanar.cginc"
 
             struct appdata
             {
@@ -44,13 +45,6 @@ Shader "Oil Painting"
                 float3 worldPos    : TEXCOORD4;
             };
 
-            struct TriplanarUV
-            {
-	            float2 x;
-                float2 y;
-                float2 z;
-            };
-
             sampler2D _PaintTexture;
             float4 _PaintTexture_ST;
             sampler2D _ColorRamp;
@@ -66,21 +60,6 @@ Shader "Oil Painting"
             float _SpecularIntensity;
             float _SpecularPower;
             float _SpecularSmoothing;
-
-            TriplanarUV GetTriplanarUV(float3 worldPos)
-            {
-	            TriplanarUV uv;
-	            uv.x = worldPos.zy;
-	            uv.y = worldPos.xz;
-	            uv.z = worldPos.xy;
-	            return uv;
-            }
-
-            float3 GetTriplanarWeights(float3 normal)
-            {
-                float3 weight = abs(normal);
-	            return weight / (weight.x + weight.y + weight.z);
-            }
             
             v2f vert(appdata v)
             {
@@ -100,14 +79,7 @@ Shader "Oil Painting"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                // TODO: Apply scaling on triplanar mapping.
-                TriplanarUV triplanarUV = GetTriplanarUV(i.localPos);
-                float3 triplanarWeights = GetTriplanarWeights(i.normal);
-	            float soapX = tex2D(_PaintTexture, triplanarUV.x).r;
-	            float soapY = tex2D(_PaintTexture, triplanarUV.y).r;
-	            float soapZ = tex2D(_PaintTexture, triplanarUV.z).r;
-                float paint = soapX * triplanarWeights.x + soapY * triplanarWeights.y + soapZ * triplanarWeights.z;
-
+                float paint = GetTriplanarMapping(_PaintTexture, i.localPos, i.normal).r;
                 // paint = tex2D(_PaintTexture, i.uv); // Discard triplanar mapping.
 
                 float3 normal = i.worldNormal * 0.5 + 0.5;
