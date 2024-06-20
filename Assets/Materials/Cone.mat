@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sphere_03
+  m_Name: Cone
   m_Shader: {fileID: 4800000, guid: 7cc3fe22a0725844886d2f2f5c922a24, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRamp:
-        m_Texture: {fileID: 2800000, guid: b8b7dddd6e1755444b130839ba6ed68c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 559d5931562620048b7f60efe0a78a37, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -40,10 +40,10 @@ Material:
     m_Floats:
     - _AmbientColorIntensity: 0.761
     - _LightIntensity: 1
-    - _MaxLightValue: 1
-    - _MinLightValue: 0.056
-    - _PaintSmoothing: 0.491
-    - _SpecularIntensity: 0
-    - _SpecularPower: 45.3
+    - _MaxLightValue: 0.341
+    - _MinLightValue: 0.158
+    - _PaintSmoothing: 0.52
+    - _SpecularIntensity: 1
+    - _SpecularPower: 88
     m_Colors: []
   m_BuildTextureStacks: []

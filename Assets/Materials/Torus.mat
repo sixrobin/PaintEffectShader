@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sphere_01
+  m_Name: Torus
   m_Shader: {fileID: 4800000, guid: 7cc3fe22a0725844886d2f2f5c922a24, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRamp:
-        m_Texture: {fileID: 2800000, guid: 5aa5919e19f60a34d898557ed1c8ce49, type: 3}
+        m_Texture: {fileID: 2800000, guid: b8b7dddd6e1755444b130839ba6ed68c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -40,10 +40,10 @@ Material:
     m_Floats:
     - _AmbientColorIntensity: 0.761
     - _LightIntensity: 1
-    - _MaxLightValue: 0.641
+    - _MaxLightValue: 1
     - _MinLightValue: 0.056
-    - _PaintSmoothing: 0.264
-    - _SpecularIntensity: 1
+    - _PaintSmoothing: 0.491
+    - _SpecularIntensity: 0
     - _SpecularPower: 45.3
     m_Colors: []
   m_BuildTextureStacks: []
