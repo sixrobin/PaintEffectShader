@@ -80,8 +80,7 @@ Shader "Oil Painting"
 
                 float diffuse = lambert(lightColor, _LightIntensity, normal, lightDir).x;
                 diffuse = smoothstep(paint - _PaintSmoothing, paint + _PaintSmoothing, diffuse);
-                diffuse = max(diffuse, _MinLightValue);
-                diffuse = min(diffuse, _MaxLightValue);
+                diffuse = clamp(diffuse, _MinLightValue, _MaxLightValue);
                 diffuse += spec;
 
                 // TODO: Add fresnel to see how it looks.
