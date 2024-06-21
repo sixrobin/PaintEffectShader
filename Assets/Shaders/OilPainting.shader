@@ -14,6 +14,9 @@ Shader "Oil Painting"
         _SpecularIntensity ("Specular Intensity", Range(0, 1)) = 1
         _SpecularPower ("Specular Power", Range(1, 128)) = 64
         _SpecularSmoothing ("Specular Smoothing", Range(0, 1)) = 0.5
+        _FresnelPower ("Fresnel Power", Range(1, 10)) = 1
+        _FresnelIntensity ("Fresnel Intensity", Range(0, 10)) = 1
+        _FresnelSmoothing ("Fresnel Smoothing", Range(0, 1)) = 0.5
     }
     
     SubShader
@@ -61,45 +64,56 @@ Shader "Oil Painting"
             float _SpecularIntensity;
             float _SpecularPower;
             float _SpecularSmoothing;
-            
+
+            float _FresnelPower;
+            float _FresnelIntensity;
+            float _FresnelSmoothing;
+
             v2f vert(appdata v)
             {
                 v2f o;
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _PaintTexture);
+
+                o.normal = v.normal;
+                o.worldNormal = normalize(mul(unity_ObjectToWorld, float4(v.normal, 0))).xyz;
                 
                 o.localPos = v.vertex.xyz;
-                o.worldPos = mul(unity_ObjectToWorld, o.localPos);
-                
-                o.normal = v.normal;
-                o.worldNormal = normalize(mul(unity_ObjectToWorld, float4(o.normal, 0)));
+                o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float paint = GetTriplanarMapping(_PaintTexture, i.localPos, i.normal).r;
-                // paint = tex2D(_PaintTexture, i.uv); // Discard triplanar mapping.
-
                 float3 normal = i.worldNormal * 0.5 + 0.5;
                 float4 lightColor = _LightColor0;
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
+                
+                // Paint texture.
+                float paint = GetTriplanarMapping(_PaintTexture, i.localPos, i.normal).r;
+                // paint = tex2D(_PaintTexture, i.uv); // TODO: Toggle to use triplanar mapping or not.
 
-                float spec = specular(_SpecularIntensity, i.worldNormal, lightDir, i.worldPos, _SpecularPower);
-                spec = smoothstep(paint - _SpecularSmoothing, paint + _SpecularSmoothing, spec);
-
-                float diffuse = lambert(lightColor.rgb, _LightIntensity, normal, lightDir).x;
+                // Diffuse base.
+                float diffuse = computeLambert(lightColor.rgb, _LightIntensity, normal, lightDir).x;
                 diffuse = smoothstep(paint - _PaintSmoothing, paint + _PaintSmoothing, diffuse);
                 diffuse = clamp(diffuse, _MinLightValue, _MaxLightValue);
-                diffuse += spec;
 
-                // TODO: Add fresnel to see how it looks.
+                // Specular.
+                float specular = computeSpecular(_SpecularIntensity, i.worldNormal, lightDir, i.worldPos, _SpecularPower);
+                specular = smoothstep(paint - _SpecularSmoothing, paint + _SpecularSmoothing, specular);
+                diffuse += specular;
+
+                // Fresnel.
+                float fresnel = computeFresnel(i.worldNormal, i.worldPos, _FresnelPower) * _FresnelIntensity;
+                fresnel = smoothstep(paint - _FresnelSmoothing, paint + _FresnelSmoothing, fresnel);
+                diffuse += fresnel;
+
                 // TODO: Add shadows.
 
+                // Coloring.
                 float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0)) * lightColor;
-
                 float3 ambientColor = UNITY_LIGHTMODEL_AMBIENT * _AmbientColorIntensity;
                 float ambientColorMask = saturate(smoothstep(_AmbientColorMinThreshold, 1, 1 - diffuse));
                 paintColor.rgb = lerp(paintColor.rgb, paintColor.rgb + ambientColor, ambientColorMask);
