@@ -8,6 +8,7 @@ Shader "Oil Painting"
         _ColorRamp ("Color Ramp", 2D) = "white" {}
         _PaintSmoothing ("Paint Smoothing", Range(0, 1)) = 0.5
         _LightIntensity ("Light Intensity", Range(0, 1)) = 1
+        _LightColorIntensity ("Light Color Intensity", Range(0, 1)) = 1
         _AmbientColorIntensity ("Ambient Color Intensity", Range(0, 1)) = 1
         _AmbientColorMinThreshold ("Ambient Color Min Threshold", Range(0, 1)) = 0
         _MinLightValue ("Min Light Value", Range(0, 1)) = 0
@@ -18,18 +19,29 @@ Shader "Oil Painting"
         _FresnelPower ("Fresnel Power", Range(1, 10)) = 1
         _FresnelIntensity ("Fresnel Intensity", Range(0, 10)) = 1
         _FresnelSmoothing ("Fresnel Smoothing", Range(0, 1)) = 0.5
+        _ShadowIntensity ("Shadow Intensity", Range(0, 1)) = 0.9
     }
     
     SubShader
     {
+        UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
+        
         Pass
         {
+            Tags
+            {
+                "RenderType"="Opaque"
+                "LightMode"="ForwardBase"
+            }
+            
             CGPROGRAM
             
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_fwdadd_fullshadows nolightmap nodirlightmap nodynlightmap novertexlight
 
             #include "UnityCG.cginc"
+            #include "AutoLight.cginc"
             #include "Lighting.cginc"
             #include "Triplanar.cginc"
 
@@ -42,12 +54,13 @@ Shader "Oil Painting"
 
             struct v2f
             {
-                float4 vertex      : SV_POSITION;
+                float4 pos         : SV_POSITION;
                 float2 uv          : TEXCOORD0;
-                float3 normal      : TEXCOORD1;
-                float3 worldNormal : TEXCOORD2;
-                float3 localPos    : TEXCOORD3;
-                float3 worldPos    : TEXCOORD4;
+                SHADOW_COORDS(1)
+                float3 normal      : TEXCOORD2;
+                float3 worldNormal : TEXCOORD3;
+                float3 localPos    : TEXCOORD4;
+                float3 worldPos    : TEXCOORD5;
             };
 
             sampler2D _PaintTexture;
@@ -59,6 +72,7 @@ Shader "Oil Painting"
             
             float4 _LightColor0;
             float _LightIntensity;
+            float _LightColorIntensity;
             float _AmbientColorIntensity;
             float _AmbientColorMinThreshold;
             float _MinLightValue;
@@ -72,11 +86,13 @@ Shader "Oil Painting"
             float _FresnelIntensity;
             float _FresnelSmoothing;
 
+            float _ShadowIntensity;
+            
             v2f vert(appdata v)
             {
                 v2f o;
 
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _PaintTexture);
 
                 o.normal = v.normal;
@@ -85,6 +101,8 @@ Shader "Oil Painting"
                 o.localPos = v.vertex.xyz;
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 
+                TRANSFER_SHADOW(o)
+                
                 return o;
             }
 
@@ -114,10 +132,14 @@ Shader "Oil Painting"
                 fresnel = smoothstep(paint - _FresnelSmoothing, paint + _FresnelSmoothing, fresnel);
                 diffuse += fresnel;
 
-                // TODO: Add shadows.
+                // Cast shadow.
+                float shadow = SHADOW_ATTENUATION(i);
+                shadow = smoothstep(paint - _FresnelSmoothing, paint + _FresnelSmoothing, shadow);
+                diffuse = lerp(diffuse, diffuse * shadow, _ShadowIntensity);
 
                 // Coloring.
-                float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0)) * lightColor;
+                float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0));
+                paintColor = lerp(paintColor, paintColor * lightColor, _LightColorIntensity);
                 float3 ambientColor = UNITY_LIGHTMODEL_AMBIENT * _AmbientColorIntensity;
                 float ambientColorMask = saturate(smoothstep(_AmbientColorMinThreshold, 1, 1 - diffuse));
                 paintColor.rgb = lerp(paintColor.rgb, paintColor.rgb + ambientColor, ambientColorMask);
@@ -127,5 +149,6 @@ Shader "Oil Painting"
             
             ENDCG
         }
+        
     }
 }

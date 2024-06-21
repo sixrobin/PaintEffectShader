@@ -10,7 +10,8 @@ Material:
   m_Name: Ground
   m_Shader: {fileID: 4800000, guid: 7cc3fe22a0725844886d2f2f5c922a24, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _USETRIPLANARMAPPING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRamp:
-        m_Texture: {fileID: 2800000, guid: d1ca7c8630eaa014c8cddc94cdbe42b6, type: 3}
+        m_Texture: {fileID: 2800000, guid: f54b22f29cbc21447bfb203bb3c30601, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -39,17 +40,20 @@ Material:
     m_Ints: []
     m_Floats:
     - _AmbientColorIntensity: 1
-    - _AmbientColorMinThreshold: 1
+    - _AmbientColorMinThreshold: 0
     - _FresnelIntensity: 0
     - _FresnelPower: 1
-    - _FresnelSmoothing: 0.5
-    - _LightIntensity: 0.207
-    - _MaxLightValue: 1
+    - _FresnelSmoothing: 0
+    - _LightIntensity: 0.33
+    - _MaxLightValue: 0.07
     - _MinLightValue: 0
-    - _PaintSmoothing: 0.633
+    - _PaintSmoothing: 0.2
+    - _ShadowIntensity: 0.77
     - _SpecularIntensity: 0
-    - _SpecularPower: 33.7
+    - _SpecularPower: 4
     - _SpecularSmoothing: 0.5
     - _TriplanarScale: 1
-    m_Colors: []
+    - _UseTriplanarMapping: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
