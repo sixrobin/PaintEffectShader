@@ -22,39 +22,30 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRamp:
-        m_Texture: {fileID: 2800000, guid: f54b22f29cbc21447bfb203bb3c30601, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e614aa78bbd8f874eb2a59d432f58e97, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _PaintTexture:
         m_Texture: {fileID: 2800000, guid: 0a14f15268d9ddf4e999fc5ca2ff5589, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecularTexture:
-        m_Texture: {fileID: 2800000, guid: 67c9ee053778a664d8646566fa72c17c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AmbientColorIntensity: 1
     - _AmbientColorMinThreshold: 0
-    - _FresnelIntensity: 0.77
-    - _FresnelPower: 5.88
-    - _FresnelSmoothing: 0.22
-    - _LightColorIntensity: 0.25
-    - _LightIntensity: 0.33
-    - _MaxLightValue: 0.07
+    - _FresnelIntensity: 0.5
+    - _FresnelPower: 3.3
+    - _FresnelSmoothing: 0.5
+    - _LightColorIntensity: 1
+    - _LightIntensity: 1
+    - _MaxLightValue: 0.22
     - _MinLightValue: 0
-    - _PaintSmoothing: 0.2
-    - _ShadowIntensity: 0.77
-    - _SpecularIntensity: 0.2
-    - _SpecularPower: 4
+    - _PaintSmoothing: 0.5
+    - _ShadowIntensity: 1
+    - _SpecularIntensity: 0.49
+    - _SpecularPower: 64
     - _SpecularSmoothing: 0.5
-    - _TriplanarScale: 1
+    - _TriplanarScale: 3
     - _UseTriplanarMapping: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    m_Colors: []
   m_BuildTextureStacks: []
