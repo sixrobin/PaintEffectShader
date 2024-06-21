@@ -2,24 +2,46 @@ Shader "Oil Painting"
 {
     Properties
     {
+        [Header(PAINT EFFECT)]
+        [Space(5)]
         _PaintTexture ("Paint Texture", 2D) = "white" {}
         [Toggle] _UseTriplanarMapping ("Use Triplanar Mapping", Float) = 1
-        _TriplanarScale ("Triplanar Scale", Float) = 1
+        _TriplanarScale ("Triplanar Scale", Vector) = (1, 1, 1, 1)
         _ColorRamp ("Color Ramp", 2D) = "white" {}
         _PaintSmoothing ("Paint Smoothing", Range(0, 1)) = 0.5
+
+        [Space(30)]
+        
+        [Header(LIGHTING)]
+        [Space(5)]
         _LightIntensity ("Light Intensity", Range(0, 1)) = 1
         _LightColorIntensity ("Light Color Intensity", Range(0, 1)) = 1
-        _AmbientColorIntensity ("Ambient Color Intensity", Range(0, 1)) = 1
-        _AmbientColorMinThreshold ("Ambient Color Min Threshold", Range(0, 1)) = 0
         _MinLightValue ("Min Light Value", Range(0, 1)) = 0
         _MaxLightValue ("Max Light Value", Range(0, 1)) = 1
+        _ShadowIntensity ("Shadow Intensity", Range(0, 1)) = 0.9
+
+        [Space(30)]
+        
+        [Header(AMBIENT COLOR)]
+        [Space(5)]
+        _AmbientColorIntensity ("Ambient Color Intensity", Range(0, 1)) = 1
+        _AmbientColorMinThreshold ("Ambient Color Min Threshold", Range(0, 1)) = 0
+
+        [Space(30)]
+
+        [Header(SPECULAR)]
+        [Space(5)]
         _SpecularIntensity ("Specular Intensity", Range(0, 1)) = 1
         _SpecularPower ("Specular Power", Range(1, 128)) = 64
         _SpecularSmoothing ("Specular Smoothing", Range(0, 1)) = 0.5
+
+        [Space(30)]
+
+        [Header(FRESNEL)]
+        [Space(5)]
         _FresnelPower ("Fresnel Power", Range(1, 10)) = 1
         _FresnelIntensity ("Fresnel Intensity", Range(0, 10)) = 1
         _FresnelSmoothing ("Fresnel Smoothing", Range(0, 1)) = 0.5
-        _ShadowIntensity ("Shadow Intensity", Range(0, 1)) = 0.9
     }
     
     SubShader
@@ -68,6 +90,7 @@ Shader "Oil Painting"
             float _UseTriplanarMapping;
             
             sampler2D _ColorRamp;
+            float4 _ColorRamp_ST;
             float _PaintSmoothing;
             
             float4 _LightColor0;
@@ -138,7 +161,7 @@ Shader "Oil Painting"
                 diffuse = lerp(diffuse, diffuse * shadow, _ShadowIntensity);
 
                 // Coloring.
-                float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0));
+                float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0) * _ColorRamp_ST.xy + _ColorRamp_ST.zw);
                 paintColor = lerp(paintColor, paintColor * lightColor, _LightColorIntensity);
                 float3 ambientColor = UNITY_LIGHTMODEL_AMBIENT * _AmbientColorIntensity;
                 float ambientColorMask = saturate(smoothstep(_AmbientColorMinThreshold, 1, 1 - diffuse));

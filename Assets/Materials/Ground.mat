@@ -13,7 +13,7 @@ Material:
   m_InvalidKeywords:
   - _USETRIPLANARMAPPING_ON
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -46,6 +46,8 @@ Material:
     - _SpecularPower: 64
     - _SpecularSmoothing: 0.29
     - _TriplanarScale: 3
+    - _TriplanarScaleTmp: 3
     - _UseTriplanarMapping: 1
-    m_Colors: []
+    m_Colors:
+    - _TriplanarScale: {r: 1, g: 1, b: 1, a: 3}
   m_BuildTextureStacks: []

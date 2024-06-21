@@ -11,7 +11,7 @@ namespace RSPostProcessing
         
         [SerializeField, Range(0.00005f, 0.0008f)]
         private float size = 0.0001f;
-        [SerializeField, Range(0.5f, 4f)]
+        [SerializeField, Range(0f, 4f)]
         private float intensity = 2f;
 
         protected override string ShaderName => "RSPostProcessing/Sharpen";

@@ -1,4 +1,4 @@
-float _TriplanarScale;
+float4 _TriplanarScale;
 
 struct TriplanarUV
 {
@@ -27,9 +27,9 @@ float GetTriplanarMapping(sampler2D textureSampler, float3 pos, float3 normal)
     TriplanarUV uv = GetTriplanarUV(pos);
     float3 weights = GetTriplanarWeights(normal);
 
-    float3 x = tex2D(textureSampler, uv.x * _TriplanarScale);
-    float3 y = tex2D(textureSampler, uv.y * _TriplanarScale);
-    float3 z = tex2D(textureSampler, uv.z * _TriplanarScale);
+    float3 x = tex2D(textureSampler, uv.x * _TriplanarScale.x * _TriplanarScale.w);
+    float3 y = tex2D(textureSampler, uv.y * _TriplanarScale.y * _TriplanarScale.w);
+    float3 z = tex2D(textureSampler, uv.z * _TriplanarScale.z * _TriplanarScale.w);
     
     return x * weights.x + y * weights.y + z * weights.z;
 }
