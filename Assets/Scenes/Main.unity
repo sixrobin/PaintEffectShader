@@ -2078,7 +2078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shader: {fileID: 4800000, guid: d30114244423aa54792cb802f18342ea, type: 3}
-  size: 0.0002
+  size: 0.0001
   intensity: 0.5
 --- !u!114 &1805491465
 MonoBehaviour:
@@ -2094,7 +2094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shader: {fileID: 4800000, guid: 495320c24bc660d42a1f76dae49609fe, type: 3}
   _distortionTex: {fileID: 2800000, guid: cbf86839835b84b4ebdab1104cce1421, type: 3}
-  _distortionTexST: {x: 0.015, y: 0, z: 0, w: 0}
+  _distortionTexST: {x: 0.01, y: 0, z: 0, w: 0}
   _outlineThickness: 1
   _outlineColor: {r: 0, g: 0, b: 0, a: 1}
   _outlineDepthMultiplier: 0
@@ -2118,7 +2118,7 @@ MonoBehaviour:
   _shader: {fileID: 4800000, guid: 495320c24bc660d42a1f76dae49609fe, type: 3}
   _distortionTex: {fileID: 2800000, guid: ab95c4812e9b4364295f112b6c2a2ae8, type: 3}
   _distortionTexST: {x: 0.01, y: 0.03, z: 0, w: 0}
-  _outlineThickness: 6
+  _outlineThickness: 4
   _outlineColor: {r: 0.2830189, g: 0.17488432, b: 0.19396685, a: 1}
   _outlineDepthMultiplier: 22.7
   _outlineDepthBias: 3.45

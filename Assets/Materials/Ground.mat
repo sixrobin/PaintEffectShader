@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRamp:
-        m_Texture: {fileID: 2800000, guid: e614aa78bbd8f874eb2a59d432f58e97, type: 3}
+        m_Texture: {fileID: 2800000, guid: 955d6fb93d5085f4ca85a26a19c9080c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _PaintTexture:
@@ -35,16 +35,16 @@ Material:
     - _AmbientColorMinThreshold: 0
     - _FresnelIntensity: 0.5
     - _FresnelPower: 3.3
-    - _FresnelSmoothing: 0.5
+    - _FresnelSmoothing: 0.33
     - _LightColorIntensity: 1
     - _LightIntensity: 1
-    - _MaxLightValue: 0.22
+    - _MaxLightValue: 0.45
     - _MinLightValue: 0
     - _PaintSmoothing: 0.5
     - _ShadowIntensity: 1
     - _SpecularIntensity: 0.49
     - _SpecularPower: 64
-    - _SpecularSmoothing: 0.5
+    - _SpecularSmoothing: 0.29
     - _TriplanarScale: 3
     - _UseTriplanarMapping: 1
     m_Colors: []
