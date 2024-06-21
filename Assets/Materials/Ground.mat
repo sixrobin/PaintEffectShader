@@ -31,7 +31,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _PaintTexture:
         m_Texture: {fileID: 2800000, guid: 0a14f15268d9ddf4e999fc5ca2ff5589, type: 3}
-        m_Scale: {x: 7, y: 7}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularTexture:
         m_Texture: {fileID: 2800000, guid: 67c9ee053778a664d8646566fa72c17c, type: 3}
@@ -41,16 +41,16 @@ Material:
     m_Floats:
     - _AmbientColorIntensity: 1
     - _AmbientColorMinThreshold: 0
-    - _FresnelIntensity: 0
-    - _FresnelPower: 1
-    - _FresnelSmoothing: 0
+    - _FresnelIntensity: 0.77
+    - _FresnelPower: 5.88
+    - _FresnelSmoothing: 0.22
     - _LightColorIntensity: 0.25
     - _LightIntensity: 0.33
     - _MaxLightValue: 0.07
     - _MinLightValue: 0
     - _PaintSmoothing: 0.2
     - _ShadowIntensity: 0.77
-    - _SpecularIntensity: 0
+    - _SpecularIntensity: 0.2
     - _SpecularPower: 4
     - _SpecularSmoothing: 0.5
     - _TriplanarScale: 1

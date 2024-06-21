@@ -46,7 +46,7 @@ Material:
     - _FresnelSmoothing: 0.38
     - _LightColorIntensity: 0.25
     - _LightIntensity: 1
-    - _MaxLightValue: 0.69
+    - _MaxLightValue: 0.46
     - _MinLightValue: 0
     - _PaintSmoothing: 1
     - _ShadowIntensity: 0.8
