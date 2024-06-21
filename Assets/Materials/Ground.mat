@@ -44,6 +44,7 @@ Material:
     - _FresnelIntensity: 0
     - _FresnelPower: 1
     - _FresnelSmoothing: 0
+    - _LightColorIntensity: 0.25
     - _LightIntensity: 0.33
     - _MaxLightValue: 0.07
     - _MinLightValue: 0

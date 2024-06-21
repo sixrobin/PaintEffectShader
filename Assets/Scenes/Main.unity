@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 193125685}
   - component: {fileID: 193125684}
   m_Layer: 0
-  m_Name: Blueberry (2)
+  m_Name: Blackberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 199889737}
   - component: {fileID: 199889736}
   m_Layer: 0
-  m_Name: Blueberry
+  m_Name: Blackberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 223623852}
   - component: {fileID: 223623851}
   m_Layer: 0
-  m_Name: Blueberry (5)
+  m_Name: Blackberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 413567466}
   - component: {fileID: 413567465}
   m_Layer: 0
-  m_Name: Blueberry (4)
+  m_Name: Blackberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,7 +1049,7 @@ GameObject:
   - component: {fileID: 657401733}
   - component: {fileID: 657401732}
   m_Layer: 0
-  m_Name: Blueberry (1)
+  m_Name: Blackberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,8 +1213,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1468787224}
   - component: {fileID: 1468787223}
+  - component: {fileID: 1468787225}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,6 +1298,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 38.3, y: -179.8, z: 0}
+--- !u!114 &1468787225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468787222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea12a0abea9112f44ac10a574c725b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 30
+  _clockwise: 1
+  _axis: 2
+  _space: 0
 --- !u!1 &1805491460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,7 +1326,7 @@ GameObject:
   - component: {fileID: 1805491462}
   - component: {fileID: 1805491461}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1433,7 +1450,7 @@ GameObject:
   - component: {fileID: 1933668683}
   - component: {fileID: 1933668682}
   m_Layer: 0
-  m_Name: Blueberry (3)
+  m_Name: Blackberry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
