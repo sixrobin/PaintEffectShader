@@ -3,6 +3,7 @@ Shader "Oil Painting"
     Properties
     {
         _PaintTexture ("Paint Texture", 2D) = "white" {}
+        [Toggle] _UseTriplanarMapping ("Use Triplanar Mapping", Float) = 1
         _TriplanarScale ("Triplanar Scale", Float) = 1
         _ColorRamp ("Color Ramp", 2D) = "white" {}
         _PaintSmoothing ("Paint Smoothing", Range(0, 1)) = 0.5
@@ -51,6 +52,8 @@ Shader "Oil Painting"
 
             sampler2D _PaintTexture;
             float4 _PaintTexture_ST;
+            float _UseTriplanarMapping;
+            
             sampler2D _ColorRamp;
             float _PaintSmoothing;
             
@@ -91,9 +94,10 @@ Shader "Oil Painting"
                 float4 lightColor = _LightColor0;
                 float3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
                 
-                // Paint texture.
-                float paint = GetTriplanarMapping(_PaintTexture, i.localPos, i.normal).r;
-                // paint = tex2D(_PaintTexture, i.uv); // TODO: Toggle to use triplanar mapping or not.
+                // Paint brush texture.
+                float paint = _UseTriplanarMapping
+                              ? GetTriplanarMapping(_PaintTexture, i.localPos, i.normal).r
+                              : tex2D(_PaintTexture, i.uv);
 
                 // Diffuse base.
                 float diffuse = computeLambert(lightColor.rgb, _LightIntensity, normal, lightDir).x;

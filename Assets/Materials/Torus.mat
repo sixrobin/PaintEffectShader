@@ -10,7 +10,8 @@ Material:
   m_Name: Torus
   m_Shader: {fileID: 4800000, guid: 7cc3fe22a0725844886d2f2f5c922a24, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _USETRIPLANARMAPPING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,16 +41,17 @@ Material:
     m_Floats:
     - _AmbientColorIntensity: 1
     - _AmbientColorMinThreshold: 0.75
-    - _FresnelIntensity: 0.85
+    - _FresnelIntensity: 1.48
     - _FresnelPower: 3.08
     - _FresnelSmoothing: 0.235
     - _LightIntensity: 1
-    - _MaxLightValue: 0.825
-    - _MinLightValue: 0
-    - _PaintSmoothing: 0.486
+    - _MaxLightValue: 0.827
+    - _MinLightValue: 0.53
+    - _PaintSmoothing: 0.474
     - _SpecularIntensity: 1
     - _SpecularPower: 23.6
     - _SpecularSmoothing: 0.178
     - _TriplanarScale: 1
+    - _UseTriplanarMapping: 1
     m_Colors: []
   m_BuildTextureStacks: []
