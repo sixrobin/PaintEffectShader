@@ -56,6 +56,8 @@ Shader "Oil Painting"
                 "LightMode"="ForwardBase"
             }
             
+            Cull Off
+            
             CGPROGRAM
             
             #pragma vertex vert
