@@ -41,7 +41,7 @@ Material:
     - _MaxLightValue: 1
     - _MinLightValue: 0.413
     - _PaintSmoothing: 0.5
-    - _ShadowIntensity: 0.178
+    - _ShadowIntensity: 0.62
     - _SpecularIntensity: 0
     - _SpecularPower: 59
     - _SpecularSmoothing: 0

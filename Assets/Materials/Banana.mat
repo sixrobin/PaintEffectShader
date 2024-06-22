@@ -43,13 +43,13 @@ Material:
     - _AmbientColorMinThreshold: 0
     - _FresnelIntensity: 0
     - _FresnelPower: 1
-    - _FresnelSmoothing: 0
+    - _FresnelSmoothing: 0.41
     - _LightColorIntensity: 0.25
     - _LightIntensity: 1
     - _MaxLightValue: 1
     - _MinLightValue: 0.31
     - _PaintSmoothing: 0.7
-    - _ShadowIntensity: 0.28
+    - _ShadowIntensity: 0.78
     - _SpecularIntensity: 0
     - _SpecularPower: 28
     - _SpecularSmoothing: 0.14
