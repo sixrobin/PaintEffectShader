@@ -7,6 +7,7 @@ Shader "Oil Painting"
         _PaintTexture ("Paint Texture", 2D) = "white" {}
         [Toggle] _UseTriplanarMapping ("Use Triplanar Mapping", Float) = 1
         _TriplanarScale ("Triplanar Scale", Vector) = (1, 1, 1, 1)
+        [Space(20)]
         _ColorRamp ("Color Ramp", 2D) = "white" {}
         _PaintSmoothing ("Paint Smoothing", Range(0, 1)) = 0.5
 
@@ -19,6 +20,7 @@ Shader "Oil Painting"
         _MinLightValue ("Min Light Value", Range(0, 1)) = 0
         _MaxLightValue ("Max Light Value", Range(0, 1)) = 1
         _ShadowIntensity ("Shadow Intensity", Range(0, 1)) = 0.9
+        [Toggle] DEBUGDIFFUSELIGHTING ("Debug Diffuse Lighting", Float) = 0
 
         [Space(30)]
         
@@ -34,6 +36,7 @@ Shader "Oil Painting"
         _SpecularIntensity ("Specular Intensity", Range(0, 1)) = 1
         _SpecularPower ("Specular Power", Range(1, 128)) = 64
         _SpecularSmoothing ("Specular Smoothing", Range(0, 1)) = 0.5
+        [Toggle] DEBUGSPECULAR ("Debug Specular", Float) = 0
 
         [Space(30)]
 
@@ -42,6 +45,7 @@ Shader "Oil Painting"
         _FresnelPower ("Fresnel Power", Range(1, 10)) = 1
         _FresnelIntensity ("Fresnel Intensity", Range(0, 10)) = 1
         _FresnelSmoothing ("Fresnel Smoothing", Range(0, 1)) = 0.5
+        [Toggle] DEBUGFRESNEL ("Debug Fresnel", Float) = 0
     }
     
     SubShader
@@ -63,6 +67,7 @@ Shader "Oil Painting"
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_fwdadd_fullshadows nolightmap nodirlightmap nodynlightmap novertexlight
+            #pragma shader_feature _ DEBUGDIFFUSELIGHTING_ON DEBUGSPECULAR_ON DEBUGFRESNEL_ON
 
             #include "UnityCG.cginc"
             #include "AutoLight.cginc"
@@ -147,20 +152,32 @@ Shader "Oil Painting"
                 diffuse = smoothstep(paint - _PaintSmoothing, paint + _PaintSmoothing, diffuse);
                 diffuse = clamp(diffuse, _MinLightValue, _MaxLightValue);
 
+                // Cast shadow.
+                float shadow = SHADOW_ATTENUATION(i);
+                shadow = smoothstep(paint - _FresnelSmoothing, paint + _FresnelSmoothing, shadow);
+                diffuse = lerp(diffuse, diffuse * shadow, _ShadowIntensity);
+                
+                #if defined(DEBUGDIFFUSELIGHTING_ON)
+                return fixed4(diffuse.xxx, 1);
+                #endif
+
                 // Specular.
                 float specular = computeSpecular(_SpecularIntensity, i.worldNormal, lightDir, i.worldPos, _SpecularPower);
                 specular = smoothstep(paint - _SpecularSmoothing, paint + _SpecularSmoothing, specular);
                 diffuse += specular;
 
+                #if defined(DEBUGSPECULAR_ON)
+                return fixed4(specular.xxx, 1);
+                #endif
+                
                 // Fresnel.
                 float fresnel = computeFresnel(i.worldNormal, i.worldPos, _FresnelPower) * _FresnelIntensity;
                 fresnel = smoothstep(paint - _FresnelSmoothing, paint + _FresnelSmoothing, fresnel);
                 diffuse += fresnel;
 
-                // Cast shadow.
-                float shadow = SHADOW_ATTENUATION(i);
-                shadow = smoothstep(paint - _FresnelSmoothing, paint + _FresnelSmoothing, shadow);
-                diffuse = lerp(diffuse, diffuse * shadow, _ShadowIntensity);
+                #if defined(DEBUGFRESNEL_ON)
+                return fixed4(fresnel.xxx, 1);
+                #endif
 
                 // Coloring.
                 float4 paintColor = tex2D(_ColorRamp, float2(diffuse, 0) * _ColorRamp_ST.xy + _ColorRamp_ST.zw);
