@@ -7,7 +7,7 @@ Shader "Oil Painting"
         _PaintTexture ("Paint Texture", 2D) = "white" {}
         [Toggle] _UseTriplanarMapping ("Use Triplanar Mapping", Float) = 1
         _TriplanarScale ("Triplanar Scale", Vector) = (1, 1, 1, 1)
-        [Space(20)]
+        [Space(2Tu veux0)]
         _ColorRamp ("Color Ramp", 2D) = "white" {}
         _PaintSmoothing ("Paint Smoothing", Range(0, 1)) = 0.5
 
