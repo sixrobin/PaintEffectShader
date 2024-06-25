@@ -1,5 +1,6 @@
 # Paint Effect shader
-A shader applied to any object to make it look as it has been painted. The project also uses a custom post processing effect, making the screen looks like it's a painting canvas.
+A shader applied to any object to make it look as it has been painted. The shader only uses a "paint texture", a grayscale texture used for the brush strokes effect, and a gradient texture, used to change the paint color based on lighting.
+The project also features custom post processing effects, making the screen looks like a painting canvas.
 
 **Work in progress**, but here are some screenshots.
 
