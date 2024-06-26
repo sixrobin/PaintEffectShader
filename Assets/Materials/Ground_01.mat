@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ColorRamp:
-        m_Texture: {fileID: 2800000, guid: 955d6fb93d5085f4ca85a26a19c9080c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 391fd300db1122248aba1644f5b7e0bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _PaintTexture:
@@ -31,23 +31,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - DEBUGDIFFUSELIGHTING: 0
+    - DEBUGFRESNEL: 0
+    - DEBUGSPECULAR: 0
     - _AmbientColorIntensity: 1
     - _AmbientColorMinThreshold: 0
-    - _FresnelIntensity: 0.5
-    - _FresnelPower: 3.3
-    - _FresnelSmoothing: 0.33
+    - _FresnelIntensity: 2.59
+    - _FresnelPower: 4.57
+    - _FresnelSmoothing: 0.541
     - _LightColorIntensity: 1
     - _LightIntensity: 1
     - _MaxLightValue: 0.45
     - _MinLightValue: 0
-    - _PaintSmoothing: 0.5
+    - _PaintSmoothing: 0.26
     - _ShadowIntensity: 1
-    - _SpecularIntensity: 0.49
+    - _SpecularIntensity: 0
     - _SpecularPower: 64
-    - _SpecularSmoothing: 0.29
+    - _SpecularSmoothing: 0.254
     - _TriplanarScale: 3
     - _TriplanarScaleTmp: 3
     - _UseTriplanarMapping: 1
     m_Colors:
-    - _TriplanarScale: {r: 1, g: 1, b: 1, a: 3}
+    - _TriplanarScale: {r: 1, g: 1, b: 1, a: 4}
   m_BuildTextureStacks: []
