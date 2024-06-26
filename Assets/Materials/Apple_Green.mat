@@ -39,6 +39,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - DEBUGDIFFUSELIGHTING: 0
+    - DEBUGFRESNEL: 0
+    - DEBUGSPECULAR: 0
     - _AmbientColorIntensity: 1
     - _AmbientColorMinThreshold: 0
     - _FresnelIntensity: 0.2
