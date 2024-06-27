@@ -62,7 +62,7 @@ Some custom post processing effects are implemented, to enhance the overall pain
 
 ![pp_02](https://github.com/sixrobin/PaintEffectShader/assets/55784799/02ada3d9-e655-4c2a-8fba-2b8302936d6d)
 
-**Sobel outline:** an outline filter can be added, to add some sort of drawn lines. May not look good with any scene, but still a nice addition to experiment with if needed.
+**Sobel outline:** an outline filter can be added, to add some sort of drawn lines. May not look good with all scenes, but still a nice addition to experiment with if needed.
 
 ![pp_03](https://github.com/sixrobin/PaintEffectShader/assets/55784799/6abc3618-2ba9-4c31-ac81-f6bcd8511cb5)
 
