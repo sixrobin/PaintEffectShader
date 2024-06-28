@@ -34,7 +34,7 @@ Brought together, all of the effects detailed above give this result:
 
 ![apple_effectsmerge](https://github.com/sixrobin/PaintEffectShader/assets/55784799/c267669b-c5fd-45bb-a3f8-d962f34bc7bf)
 
-**Gradient map:** using the lighting data, a color gradient is applied across the object.
+**Gradient map:** using the lighting data, a color gradient is applied across the object. Note that the gradient is applied to all of the mesh, meaning that if some parts of it should use a different gradient, than they should be split into separate meshes. Here, the apple's tail should not use the same color as the apple itself (this is fine for the demo purpose, and also to show a restriction of the shader).
 
 ![apple_color](https://github.com/sixrobin/PaintEffectShader/assets/55784799/1173f33d-45c0-43a9-b3de-91184d6cb1d8)
 
@@ -52,11 +52,23 @@ The effect is now done, although the cast shadow still looks bad. To fix this, t
 
 ## Post processing
 
-TODO: Distortion.
+Some custom post processing effects are implemented, to enhance the overall painted effect.
 
-TODO: Sobel outline.
+**Base image:** consider this image as the base rendered image.
 
-TODO: Paint canvas.
+![pp_01](https://github.com/sixrobin/PaintEffectShader/assets/55784799/c6d2534f-09e3-4962-9e18-70b370facdc7)
+
+**Distortion:** using a noise texture, the screen can be distorted to mimic the flaws of brush strokes. Ideally, a Kuwahara filter could be implemented, but I didn't take the time to look at it (may be something to do in the future).
+
+![pp_02](https://github.com/sixrobin/PaintEffectShader/assets/55784799/02ada3d9-e655-4c2a-8fba-2b8302936d6d)
+
+**Sobel outline:** an outline filter can be added, to add some sort of drawn lines. May not look good with all scenes, but still a nice addition to experiment with if needed.
+
+![pp_03](https://github.com/sixrobin/PaintEffectShader/assets/55784799/6abc3618-2ba9-4c31-ac81-f6bcd8511cb5)
+
+**Canvas texture:** the most important effect, applying a painting canvas texture with a custom mask on the screen borders. The mask has been hand drawn and is not driven by material parameters, it's a simple grayscale texture.
+
+![pp_04](https://github.com/sixrobin/PaintEffectShader/assets/55784799/0bcd67ba-ef1f-42bb-8c7d-2a8739d93779)
 
 ## Demo screenshots
 
